@@ -2087,9 +2087,9 @@ def preprocess_file(
             out_line = ""
             for match in FRegex.DEFINED.finditer(line):
                 if match.group(1) in defs:
-                    out_line += line[i0 : match.start(0)] + "($@)"
+                    out_line += line[i0 : match.start(0)] + "(@$@)"
                 else:
-                    out_line += line[i0 : match.start(0)] + "($%)"
+                    out_line += line[i0 : match.start(0)] + "(%$%)"
                 i0 = match.end(0)
             if i0 < len(line):
                 out_line += line[i0:]
@@ -2106,8 +2106,8 @@ def preprocess_file(
                 i0 = match.end(0)
             if i0 < len(line):
                 out_line += line[i0:]
-            out_line = out_line.replace("$@", "True")
-            out_line = out_line.replace("$%", "False")
+            out_line = out_line.replace("@$@", "True")
+            out_line = out_line.replace("%$%", "False")
             return out_line
 
         if defs is None:
